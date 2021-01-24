@@ -1,0 +1,199 @@
+<div class="wrapper-box">
+    <div class="container">
+        <div class="requiredFields"><em><strong class="required">*</strong> Obligatoriska uppgifter</em></div>
+        <div [hidden]="submitted">
+            <h1>Rekvisition</h1>
+            <form (ngSubmit)="onSubmit(heroForm.value)" #heroForm="ngForm">
+                <h2>Dokumentuppgifter</h2>
+                <div class="form-group">
+                    <label for="name">Namn kontaktperson <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name"
+                        #name="ngModel" maxlength="60">
+                    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                        Fyll i namn kontaktperson.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="telefon">Telefon <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="telefon" required [(ngModel)]="model.telefon"
+                        name="telefon" #telefon="ngModel" maxlength="15">
+                    <div [hidden]="telefon.valid || telefon.pristine" class="alert alert-danger">
+                        Fyll i telefon.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="telefon">E-post <strong class="required">*</strong></label>
+                    <input type="email" class="form-control" id="epost" required [(ngModel)]="model.epost" name="epost"
+                        #epost="ngModel" appEmailvalidator>
+                    <div [hidden]="epost.valid || epost.pristine" class="alert alert-danger">
+                        Fyll i e-post.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pdfFiles">Handling <strong class="required">*</strong></label>
+
+                    <input type="file" (change)="fileChange($event)" id="pdfFiles" multiple required
+                        placeholder="Upload file" [(ngModel)]="model.pdfFiles" accept=".pdf" #pdfFiles="ngModel">
+                    <div [hidden]="pdfFiles.valid || pdfFiles.pristine" class="alert alert-danger">
+                        Ladda upp handling.
+                    </div>
+                </div>
+
+
+
+                <h2>Ärendeuppgifter/Person</h2>
+                <div class="form-group">
+                    <label for="dob_year">Födelseår <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" placeholder="ÅÅÅÅ" id="dob_year" required
+                        [(ngModel)]="model.dob_year" name="dob_year" #dob_year="ngModel" maxlength="4" appYearvalidator>
+                    <div [hidden]="dob_year.valid || dob_year.pristine" class="alert alert-danger">
+                        Fyll i Födelseår.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dob_month">Födelsemånad <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" placeholder="MM" id="dob_month" required
+                        [(ngModel)]="model.dob_month" name="dob_month" #dob_month="ngModel" minlength="2" maxlength="2"
+                        appMonthvalidator>
+                    <div [hidden]="dob_month.valid || dob_month.pristine" class="alert alert-danger">
+                        Fyll i Födelsemånad.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dob_day">Födelsedag <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" placeholder="DD" id="dob_day" required
+                        [(ngModel)]="model.dob_day" name="dob_day" #dob_day="ngModel" minlength="2" maxlength="2"
+                        appDayvalidator>
+                    <div [hidden]="dob_day.valid || dob_day.pristine" class="alert alert-danger">
+                        Fyll i Födelsedag.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Kön <strong class="required">*</strong></label>
+                    <select class="form-control" id="country" required [(ngModel)]="model.gender" name="gender"
+                        #gender="ngModel">
+                        <option value="M">Man</option>
+                        <option value="K">Kvinna</option>
+                    </select>
+                    <div [hidden]="gender.valid || gender.pristine" class="alert alert-danger">
+                        Välj Kön
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Efternamn <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="lastname" required [(ngModel)]="model.lastname"
+                        name="lastname" #lastname="ngModel" maxlength="60">
+                    <div [hidden]="lastname.valid || lastname.pristine" class="alert alert-danger">
+                        Fyll i Efternamn.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Förnamn <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="firstname" required [(ngModel)]="model.firstname"
+                        name="firstname" #firstname="ngModel" maxlength="80">
+                    <div [hidden]="firstname.valid || firstname.pristine" class="alert alert-danger">
+                        Fyll i Förnamn.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="info">Ytterligare namnuppgift</label>
+                    <textarea name="info" cols="40" rows="4" #info="ngModel" maxlength="200"
+                        [(ngModel)]="model.info"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="birthplace">Födelseort i utlandet <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="birthplace" required [(ngModel)]="model.birthplace"
+                        name="birthplace" #birthplace="ngModel" maxlength="80">
+                    <div [hidden]="birthplace.valid || birthplace.pristine" class="alert alert-danger">
+                        Fyll i Födelseort i utlandet.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country">Primärt Medborgarskap <strong class="required">*</strong></label>
+                    <select class="form-control" id="country" required [(ngModel)]="model.country" name="country"
+                        #country="ngModel">
+                        <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+                    </select>
+                    <div [hidden]="country.valid || country.pristine" class="alert alert-danger">
+                        Välj medborgarskap
+                    </div>
+                </div>
+
+
+                <h2>Ärendeuppgifter/Kontaktadress</h2>
+                <div class="form-group">
+                    <label for="coaddress">C/O adress</label>
+                    <input type="text" class="form-control" id="coaddress" [(ngModel)]="model.coaddress"
+                        name="coaddress" #coaddress="ngModel" maxlength="35">
+                    <div [hidden]="coaddress.valid || coaddress.pristine" class="alert alert-danger">
+                        Fyll i C/O adress.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="estab">Adressfort sättning <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="estab" required [(ngModel)]="model.estab" name="estab"
+                        #coaddress="ngModel" maxlength="35">
+                    <div [hidden]="estab.valid || estab.pristine" class="alert alert-danger">
+                        Fyll i Adressfort sättning.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="streetaddress">Gatudress <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="streetaddress" required
+                        [(ngModel)]="model.streetaddress" name="streetaddress" #streetaddress="ngModel" maxlength="35">
+                    <div [hidden]="streetaddress.valid || streetaddress.pristine" class="alert alert-danger">
+                        Fyll i Gatudress.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="aptnumber">Lagenhets nummer <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="aptnumber" required [(ngModel)]="model.aptnumber"
+                        name="aptnumber" #aptnumber="ngModel" maxlength="4">
+                    <div [hidden]="aptnumber.valid || aptnumber.pristine" class="alert alert-danger">
+                        Fyll i Lagenhets nummer.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="zipcode">Postnummer <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="zipcode" required [(ngModel)]="model.zipcode"
+                        name="zipcode" #zipcode="ngModel" maxlength="5">
+                    <div [hidden]="zipcode.valid || zipcode.pristine" class="alert alert-danger">
+                        Fyll i Postnummer.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city">Postort <strong class="required">*</strong></label>
+                    <input type="text" class="form-control" id="city" required [(ngModel)]="model.city" name="city"
+                        #city="ngModel" maxlength="27">
+                    <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+                        Fyll i Postort.
+                    </div>
+                </div>
+
+                <h2>Ärendeuppgifter/Övrigt</h2>
+                <div class="form-group">
+                    <label for="estab">FaststalltId <strong class="required">*</strong></label>
+                    <select class="form-control" id="country" required [(ngModel)]="model.estab" name="estab"
+                        #estab="ngModel">
+                        <option value="PS">Pass</option>
+                        <option value="ID">Nationellt ID</option>
+                        <option value="AN">Annan handling</option>
+                        <option value="NJ">Nej</option>
+                    </select>
+                    <div [hidden]="estab.valid || estab.pristine" class="alert alert-danger">
+                        Välj FaststalltId
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Skicka</button>
+            </form>
+        </div>
+
+        <div [hidden]="!submitted">
+            <h2>Tack!</h2>
+            <button type="button" class="btn btn-default" (click)="newForm();">Ny ärende!</button>
+        </div>
+    </div>
+</div>

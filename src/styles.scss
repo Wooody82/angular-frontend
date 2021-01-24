@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    padding: 0 0 0 0;
+    background-color: #fff;
+    font-family: 'Open Sans', Verdana, sans-serif;
+    position: relative;
+    color: #333;
+}
